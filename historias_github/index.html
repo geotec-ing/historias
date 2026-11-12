@@ -1,0 +1,733 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Historias GEOTEC</title>
+<meta name="description" content="Convocatoria interna: comparte fotos, videos e historias de tu trabajo en GEOTEC para publicarlas en LinkedIn e Instagram.">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="Historias GEOTEC · Tu trabajo también construye la marca">
+<meta property="og:description" content="Comparte fotos, videos o un reto resuelto de tu área y lo publicamos con crédito a tu área.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://geotec-ing.github.io/historias/">
+<meta property="og:image" content="https://geotec-ing.github.io/historias/img/compartir.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="theme-color" content="#F7F7F3">
+<link rel="icon" type="image/png" href="img/icon-192.png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Una columna editorial: portada con curvas de nivel, franja de fotos, secciones y la ficha como formato que se envía desde la página. */
+:root {
+  --bg: #F7F7F3; --surface: #FFFFFF; --ink: #26271F; --muted: #5E6052; --line: #DCDDD2;
+  --accent: #FDD000; --accent-ink: #26271F; --green: #6E7812; --green-soft: #97A419;
+  --contour: #C9CDB0; --on-ink-accent: #FDD000; --field: #FBFBF8; --ok: #4F7A1F; --bad: #B4472B; --bad-soft: #FBEDE8;
+  --display: "Poppins", "Segoe UI", system-ui, sans-serif;
+  --body: "Inter", "Segoe UI", system-ui, sans-serif;
+  --logo-light: block; --logo-dark: none;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1A1B15; --surface: #23251D; --ink: #EDEEE5; --muted: #AEB09F; --line: #393B30;
+    --accent: #FDD000; --accent-ink: #1A1B15; --green: #B9C64A; --green-soft: #97A419;
+    --contour: #43472F; --on-ink-accent: #6E7812; --field: #1E2018; --ok: #9CC45A; --bad: #F08A6C; --bad-soft: #3A231C;
+    --logo-light: none; --logo-dark: block; color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.6; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+.wrap { max-width: 1080px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3 { font-family: var(--display); line-height: 1.15; margin: 0; text-wrap: balance; }
+h2 { font-size: clamp(1.5rem, 3.2vw, 2.1rem); font-weight: 700; letter-spacing: -0.01em; }
+h3 { font-size: 1.05rem; font-weight: 600; }
+p { margin: 0; }
+a { color: inherit; }
+.eyebrow { font-family: var(--display); font-size: .78rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--green); }
+.lead { font-size: 1.12rem; color: var(--muted); max-width: 58ch; }
+section { padding-block: clamp(48px, 7vw, 88px); border-top: 1px solid var(--line); scroll-margin-top: 16px; }
+.sec-head { display: grid; gap: 10px; margin-bottom: 32px; max-width: 680px; }
+
+.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 20px; }
+.logo { height: 34px; width: auto; }
+.logo.l { display: var(--logo-light); }
+.logo.d { display: var(--logo-dark); }
+.tag { font-size: .8rem; color: var(--muted); text-align: right; }
+
+.hero { display: grid; grid-template-columns: 1.15fr .85fr; gap: 32px; align-items: center; padding-block: 32px 40px; }
+.hero > * { min-width: 0; }
+.hero-txt { display: grid; gap: 20px; }
+.hero h1 { font-size: clamp(2.1rem, 5.4vw, 3.6rem); font-weight: 800; letter-spacing: -0.02em; }
+.hero h1 mark { background: linear-gradient(var(--accent), var(--accent)) no-repeat 0 100% / 100% .14em; color: inherit; padding-bottom: .06em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 22px; border-radius: 999px; font-family: var(--display); font-weight: 600; font-size: .98rem; text-decoration: none; border: 2px solid transparent; cursor: pointer; transition: transform .15s ease, background .15s ease; }
+.btn:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, .chip input:focus-visible + span, .drop:focus-within { outline: 3px solid var(--green-soft); outline-offset: 2px; }
+.btn-main { background: var(--accent); color: var(--accent-ink); }
+.btn-main:hover { transform: translateY(-1px); }
+.btn-sec { background: transparent; color: var(--ink); border-color: var(--ink); }
+.btn:disabled { background: var(--line); color: var(--muted); cursor: not-allowed; transform: none; }
+.terreno { display: grid; gap: 4px; max-width: 100%; }
+.terreno canvas { width: 100%; aspect-ratio: 1 / 1; display: block; }
+.cota { justify-self: end; font-family: var(--display); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); text-align: right; line-height: 1.5; }
+.cota b { color: var(--ink); font-weight: 600; }
+
+.fotos { display: grid; grid-template-columns: 2fr 1.3fr .9fr .9fr; gap: 10px; height: clamp(220px, 30vw, 330px); margin-bottom: 64px; }
+.fotos figure { margin: 0; position: relative; border-radius: 14px; overflow: hidden; min-width: 0; background: var(--line); }
+.fotos img { width: 100%; height: 100%; object-fit: cover; object-position: 38% 40%; display: block; }
+.chip-foto { position: absolute; left: 14px; bottom: 14px; display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 999px; background: #FDD000; color: #26271F; font: 600 .85rem var(--display); }
+.chip-foto svg { width: 18px; height: 18px; }
+
+.grid6 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.item { background: var(--surface); padding: 24px; display: grid; gap: 8px; align-content: start; }
+.item svg { width: 30px; height: 30px; color: var(--green); }
+.item p { color: var(--muted); font-size: .95rem; }
+
+.pasos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; counter-reset: paso; }
+.paso { display: grid; gap: 8px; align-content: start; padding-top: 18px; border-top: 3px solid var(--ink); }
+.paso::before { counter-increment: paso; content: "Paso " counter(paso); font-family: var(--display); font-size: .78rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--green); }
+.paso p { color: var(--muted); font-size: .95rem; }
+.despues { margin-top: 28px; display: flex; gap: 12px; align-items: flex-start; padding: 18px 20px; background: var(--surface); border-radius: 12px; border: 1px solid var(--line); }
+.despues svg { flex: none; width: 22px; height: 22px; color: var(--green); margin-top: 2px; }
+
+/* Ficha */
+.ficha-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 28px; align-items: start; }
+.formato { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.formato-head { display: flex; justify-content: space-between; gap: 12px; align-items: center; padding: 14px 22px; background: var(--ink); color: var(--bg); font-family: var(--display); font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; }
+.formato-head span:last-child { color: var(--on-ink-accent); }
+.bloque { display: grid; gap: 20px; padding: 22px; }
+.fila { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.campo { display: grid; gap: 6px; min-width: 0; }
+label, legend { font-weight: 600; font-size: .92rem; }
+.opc { font-weight: 400; color: var(--muted); font-size: .85rem; }
+.campo small, .ayuda { color: var(--muted); font-size: .82rem; }
+.num { display: inline-grid; place-items: center; width: 22px; height: 22px; margin-right: 6px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); font-family: var(--display); font-size: .74rem; font-weight: 700; vertical-align: 1px; }
+input[type="text"], input[type="email"], input[type="url"], input[type="month"], select, textarea { width: 100%; font: inherit; font-size: .95rem; color: var(--ink); background: var(--field); border: 1px solid var(--line); border-radius: 10px; padding: 11px 12px; }
+textarea { min-height: 76px; resize: vertical; line-height: 1.5; }
+::placeholder { color: var(--muted); opacity: .75; }
+[aria-invalid="true"] { border-color: var(--bad) !important; }
+fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.chip { position: relative; }
+.chip input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.chip span { display: inline-block; padding: 7px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--field); font-size: .88rem; color: var(--muted); transition: background .15s, color .15s, border-color .15s; }
+.chip input:checked + span { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.trampa { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+.lateral { display: grid; gap: 20px; position: sticky; top: calc(env(safe-area-inset-top, 0px) + 16px); }
+.caja { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 20px; display: grid; gap: 12px; }
+.check { display: grid; grid-template-columns: 22px 1fr; gap: 10px; align-items: start; font-size: .9rem; font-weight: 400; cursor: pointer; }
+.check input { width: 18px; height: 18px; margin: 3px 0 0; accent-color: var(--green); }
+.estado { font-size: .85rem; color: var(--muted); }
+.estado.listo { color: var(--ok); font-weight: 600; }
+.drop { position: relative; display: grid; justify-items: center; gap: 6px; padding: 22px 16px; border: 2px dashed var(--line); border-radius: 12px; background: var(--field); text-align: center; color: var(--muted); font-size: .9rem; cursor: pointer; transition: border-color .15s, background .15s; }
+.drop.sobre { border-color: var(--green-soft); }
+.drop svg { width: 28px; height: 28px; color: var(--green); }
+.drop strong { color: var(--ink); font-family: var(--display); font-weight: 600; }
+.drop input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; }
+.lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.lista li { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 10px; align-items: center; padding: 8px 10px; border-radius: 8px; background: var(--field); border: 1px solid var(--line); font-size: .85rem; }
+.lista li span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lista li .peso { color: var(--muted); font-variant-numeric: tabular-nums; }
+.lista li.malo { border-color: var(--bad); background: var(--bad-soft); }
+.quitar { border: 0; background: none; color: var(--muted); font: 600 .8rem var(--display); cursor: pointer; padding: 4px 6px; border-radius: 6px; }
+.quitar:hover { color: var(--ink); }
+.enviar { display: grid; gap: 10px; }
+.enviar .btn { width: 100%; }
+.aviso { font-size: .88rem; padding: 12px 14px; border-radius: 10px; background: var(--bad-soft); color: var(--ink); border: 1px solid var(--bad); }
+.progreso { display: grid; gap: 8px; }
+.barra { height: 8px; border-radius: 999px; background: var(--line); overflow: hidden; }
+.barra i { display: block; height: 100%; width: 0; background: var(--green-soft); transition: width .25s ease; }
+.progreso p { font-size: .85rem; color: var(--muted); }
+.alterno { border-top: 1px solid var(--line); padding-top: 14px; display: grid; gap: 10px; font-size: .88rem; color: var(--muted); }
+.alterno strong { color: var(--ink); font-family: var(--display); font-weight: 600; }
+.alterno .dir span { color: var(--ink); font-weight: 600; user-select: all; word-break: break-all; }
+.alterno-btns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.alterno-btns .btn { min-height: 44px; padding: 0 14px; font-size: .9rem; }
+.gracias { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: clamp(24px, 5vw, 48px); display: grid; gap: 14px; justify-items: start; }
+.gracias svg { width: 44px; height: 44px; color: var(--ok); }
+.gracias .codigo { font-family: var(--display); font-weight: 600; background: var(--field); border: 1px dashed var(--line); padding: 6px 12px; border-radius: 8px; font-variant-numeric: tabular-nums; }
+.gracias p { color: var(--muted); max-width: 60ch; }
+
+.guia { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.guia-col { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 24px; display: grid; gap: 14px; align-content: start; }
+.guia-col h3 { display: flex; align-items: center; gap: 10px; }
+.guia-col h3 svg { width: 24px; height: 24px; color: var(--green); }
+.guia ul, .no ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.guia li { position: relative; padding-left: 22px; color: var(--muted); font-size: .95rem; }
+.guia li::before { content: ""; position: absolute; left: 0; top: .62em; width: 10px; height: 2px; background: var(--green-soft); }
+.formatos { display: flex; gap: 14px; align-items: flex-end; margin-top: 4px; }
+.fmt { display: grid; gap: 4px; justify-items: center; font-size: .72rem; color: var(--muted); font-family: var(--display); letter-spacing: .06em; }
+.fmt i { display: block; border: 2px solid var(--ink); border-radius: 4px; }
+
+.no-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; align-items: start; }
+.no ul li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; font-size: .95rem; }
+.no ul li svg { width: 18px; height: 18px; color: var(--bad); margin-top: 3px; }
+.reco { background: var(--ink); color: var(--bg); border-radius: 16px; padding: 28px; display: grid; gap: 12px; }
+.reco h3 { font-size: 1.3rem; color: var(--bg); }
+.reco p { color: var(--bg); opacity: .82; }
+.reco .eyebrow { color: var(--on-ink-accent); }
+
+footer { border-top: 1px solid var(--line); padding-block: 32px 48px; display: flex; flex-wrap: wrap; gap: 16px 32px; justify-content: space-between; align-items: center; color: var(--muted); font-size: .9rem; }
+
+@media (max-width: 860px) {
+  .hero, .ficha-grid, .no-grid { grid-template-columns: 1fr; }
+  .terreno { max-width: 420px; justify-self: center; width: 100%; }
+  .lateral { position: static; }
+  .grid6 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .grid6, .pasos, .guia, .fila { grid-template-columns: 1fr; }
+  .tag { display: none; }
+  .hero { padding-block: 16px 32px; }
+  .fotos { grid-template-columns: repeat(2, minmax(0, 1fr)); height: auto; margin-bottom: 48px; }
+  .fotos figure { aspect-ratio: 4 / 5; }
+  .fotos figure:first-child { grid-column: span 2; aspect-ratio: 4 / 3; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <img class="logo l" src="img/geotec_logo.png" alt="GEOTEC Ingeniería Ltda." width="400" height="86">
+    <img class="logo d" src="img/geotec_logo_blanco.png" alt="GEOTEC Ingeniería Ltda." width="400" height="92">
+    <p class="tag">Convocatoria interna<br>Área comercial · Comunicaciones digitales</p>
+  </header>
+
+  <div class="hero">
+    <div class="hero-txt">
+      <p class="eyebrow">Historias GEOTEC · Convocatoria abierta</p>
+      <h1>Tu trabajo también <mark>construye la marca</mark>.</h1>
+      <p class="lead">Estamos contando en LinkedIn e Instagram cómo trabaja GEOTEC. En campo, en la oficina, en el laboratorio y en cada área hay historias que vale la pena contar. Compártelas y las publicamos con crédito a tu área.</p>
+      <div class="ctas">
+        <a class="btn btn-main" href="#ficha">Compartir mi historia</a>
+        <a class="btn btn-sec" href="#sirve">Qué nos sirve</a>
+      </div>
+    </div>
+    <div class="terreno" aria-hidden="true">
+      <canvas id="curvas"></canvas>
+      <p class="cota"><b>Curvas de nivel</b><br>Equidistancia 50 m</p>
+    </div>
+  </div>
+
+  <div class="fotos">
+    <figure>
+      <img src="img/monos.jpg" alt="Dos primates de pelaje rojizo y gris sobre una rama" width="960" height="720">
+      <span class="chip-foto"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>Tu foto puede estar aquí</span>
+    </figure>
+    <figure><img src="img/loro.jpg" alt="Loro verde con manchas rojas en las alas" style="object-position: 70% 30%" width="760" height="570" loading="lazy"></figure>
+    <figure><img src="img/zorro.jpg" alt="Zorro de cerca entre la hojarasca del bosque" style="object-position: 30% 45%" width="334" height="446" loading="lazy"></figure>
+    <figure><img src="img/ardilla.jpg" alt="Ardilla de cola anaranjada trepando un tronco" style="object-position: 50% 40%" width="349" height="475" loading="lazy"></figure>
+  </div>
+</div>
+
+<div class="wrap">
+  <section id="sirve" aria-labelledby="t-sirve">
+    <div class="sec-head">
+      <p class="eyebrow">Qué nos sirve</p>
+      <h2 id="t-sirve">Cualquier momento de tu trabajo puede ser una publicación.</h2>
+    </div>
+    <div class="grid6">
+      <div class="item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>
+        <h3>Fotos de tu trabajo</h3>
+        <p>En campo, en la oficina o en el laboratorio: personas trabajando, equipos, muestreos y lugares.</p>
+      </div>
+      <div class="item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 10l3 2-3 2z"/></svg>
+        <h3>Videos cortos</h3>
+        <p>De 10 a 30 segundos, verticales y con el sonido del lugar.</p>
+      </div>
+      <div class="item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg>
+        <h3>Un dato o una herramienta</h3>
+        <p>Algo de tu especialidad que pocos saben, un mapa, un aplicativo o un proceso que mejoró el trabajo.</p>
+      </div>
+      <div class="item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l5-9 4 6 3-4 4 7z"/><path d="M14 6l2-2 2 2"/><path d="M16 4v6"/></svg>
+        <h3>Un reto resuelto</h3>
+        <p>Qué se complicó en un proyecto o proceso y cómo lo sacaron adelante.</p>
+      </div>
+      <div class="item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="5"/><path d="M9 13.5L8 21l4-2 4 2-1-7.5"/></svg>
+        <h3>Logros y eventos</h3>
+        <p>Capacitaciones, congresos, certificaciones y cierres de proyecto.</p>
+      </div>
+      <div class="item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M14.5 14.6c.8-.4 1.6-.6 2.5-.6 2.8 0 4 2.2 4 5"/></svg>
+        <h3>El equipo</h3>
+        <p>Quiénes están detrás: un día de trabajo, una herramienta, un aprendizaje.</p>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-como">
+    <div class="sec-head">
+      <p class="eyebrow">Cómo participar</p>
+      <h2 id="t-como">Tres pasos, unos cinco minutos.</h2>
+    </div>
+    <div class="pasos">
+      <div class="paso">
+        <h3>Arma tu ficha</h3>
+        <p>Responde las cinco preguntas de abajo. Con eso escribimos la publicación sin tener que perseguirte.</p>
+      </div>
+      <div class="paso">
+        <h3>Revisa la lista</h3>
+        <p>Confirma que las personas que aparecen están de acuerdo y que no hay datos de clientes.</p>
+      </div>
+      <div class="paso">
+        <h3>Adjunta y envía</h3>
+        <p>Sube tus fotos o videos originales y envía todo desde esta misma página.</p>
+      </div>
+    </div>
+    <div class="despues">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+      <p>Después, comunicaciones edita la pieza, te la muestra antes de publicarla y la publica con crédito a tu área.</p>
+    </div>
+  </section>
+
+  <section id="ficha" aria-labelledby="t-ficha">
+    <div class="sec-head">
+      <p class="eyebrow">Ficha de historia</p>
+      <h2 id="t-ficha">Cuéntanos tu historia en cinco preguntas.</h2>
+      <p class="lead">Escribe como le contarías a un colega. No hace falta redactar bonito: nosotros lo convertimos en publicación. Mientras escribes, tu borrador se guarda en este navegador.</p>
+    </div>
+
+    <form id="f" novalidate>
+      <div class="ficha-grid">
+        <div class="formato">
+          <div class="formato-head"><span>Ficha de historia</span><span>GEOTEC</span></div>
+          <div class="bloque">
+            <div class="fila">
+              <div class="campo">
+                <label for="nombre">Tu nombre</label>
+                <input type="text" id="nombre" name="nombre" autocomplete="name" placeholder="Nombre y apellido" required maxlength="120">
+              </div>
+              <div class="campo">
+                <label for="area">Tu área</label>
+                <select id="area" name="area" required>
+                  <option value="">Elige tu área</option>
+                  <option>Componente biótico</option>
+                  <option>Componente físico</option>
+                  <option>Componente social</option>
+                  <option>SIG y cartografía</option>
+                  <option>HSEQ</option>
+                  <option>Laboratorio</option>
+                  <option>InnoLab</option>
+                  <option>Comercial</option>
+                  <option>Administrativa y financiera</option>
+                  <option>Otra</option>
+                </select>
+              </div>
+            </div>
+            <div class="campo">
+              <label for="correo">Tu correo <span class="opc">(opcional, para mostrarte la pieza antes de publicarla)</span></label>
+              <input type="email" id="correo" name="correo" autocomplete="email" placeholder="nombre@empresa.com" maxlength="120">
+            </div>
+
+            <fieldset>
+              <legend>¿Qué material tienes?</legend>
+              <div class="chips" id="tipos">
+                <label class="chip"><input type="checkbox" value="Fotos" id="t1"><span>Fotos</span></label>
+                <label class="chip"><input type="checkbox" value="Video" id="t2"><span>Video</span></label>
+                <label class="chip"><input type="checkbox" value="Dato o herramienta" id="t3"><span>Dato o herramienta</span></label>
+                <label class="chip"><input type="checkbox" value="Reto resuelto" id="t4"><span>Reto resuelto</span></label>
+                <label class="chip"><input type="checkbox" value="Logro o evento" id="t5"><span>Logro o evento</span></label>
+                <label class="chip"><input type="checkbox" value="El equipo" id="t6"><span>El equipo</span></label>
+              </div>
+            </fieldset>
+
+            <div class="campo">
+              <label for="q1"><span class="num">1</span>¿Qué hicimos?</label>
+              <textarea id="q1" name="q1" required maxlength="3000" placeholder="Ej.: Instalamos cámaras trampa para monitorear fauna, o automatizamos un informe que tomaba dos días."></textarea>
+            </div>
+            <div class="campo">
+              <label for="q2"><span class="num">2</span>¿En qué tipo de proyecto o proceso?</label>
+              <textarea id="q2" name="q2" maxlength="3000" placeholder="Ej.: Seguimiento ambiental de un proyecto de hidrocarburos en los Llanos."></textarea>
+              <small>Describe el tipo de proyecto, proceso o área. Sin nombre del cliente.</small>
+            </div>
+            <div class="campo">
+              <label for="q3"><span class="num">3</span>¿Qué reto resolvimos?</label>
+              <textarea id="q3" name="q3" maxlength="3000" placeholder="Ej.: Las lluvias cortaban el acceso y ajustamos la ruta y las fechas de revisión."></textarea>
+            </div>
+            <div class="campo">
+              <label for="q4"><span class="num">4</span>¿Qué aprendimos o qué dato vale la pena contar?</label>
+              <textarea id="q4" name="q4" maxlength="3000" placeholder="Ej.: Una sola estación puede registrar especies que de día nunca vemos."></textarea>
+            </div>
+            <div class="campo">
+              <label for="q5"><span class="num">5</span>¿Quién participó?</label>
+              <textarea id="q5" name="q5" maxlength="3000" placeholder="Ej.: Equipo biótico, con apoyo de un auxiliar de campo de la comunidad."></textarea>
+            </div>
+            <div class="campo">
+              <label for="cuando">¿Cuándo pasó? <span class="opc">(opcional)</span></label>
+              <input type="month" id="cuando" name="cuando">
+            </div>
+            <div class="trampa" aria-hidden="true">
+              <label for="web">No llenes este campo</label>
+              <input type="text" id="web" name="web" tabindex="-1" autocomplete="off">
+            </div>
+          </div>
+        </div>
+
+        <div class="lateral">
+          <div class="caja">
+            <h3>Antes de enviar</h3>
+            <label class="check"><input type="checkbox" id="c1"><span>Las personas que aparecen saben que se publicará y están de acuerdo.</span></label>
+            <label class="check"><input type="checkbox" id="c2"><span>No aparecen nombres, logos, documentos ni placas del cliente, ni números de resoluciones o expedientes.</span></label>
+            <label class="check"><input type="checkbox" id="c3"><span>No se ve la ubicación exacta de especies sensibles, nidos o predios.</span></label>
+            <label class="check"><input type="checkbox" id="c4"><span>Son los archivos originales, no capturas ni reenvíos de WhatsApp.</span></label>
+            <p class="estado" id="estado" aria-live="polite">0 de 4 revisados</p>
+          </div>
+
+          <div class="caja">
+            <h3>Fotos y videos</h3>
+            <label class="drop" id="drop">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg>
+              <strong>Elige o arrastra tus archivos</strong>
+              <span>Hasta 10 fotos o videos, de máximo 30 MB cada uno</span>
+              <input type="file" id="archivos" accept="image/*,video/*" multiple>
+            </label>
+            <ul class="lista" id="lista" aria-live="polite"></ul>
+            <div class="campo">
+              <label for="enlace">¿Videos más pesados? <span class="opc">(opcional)</span></label>
+              <input type="url" id="enlace" name="enlace" placeholder="Enlace de OneDrive, Drive o WeTransfer" maxlength="500">
+            </div>
+          </div>
+
+          <div class="enviar">
+            <p class="aviso" id="aviso" role="alert" hidden></p>
+            <div class="progreso" id="progreso" hidden>
+              <div class="barra"><i id="barra"></i></div>
+              <p id="paso-txt">Enviando…</p>
+            </div>
+            <button type="submit" class="btn btn-main" id="enviar">Enviar mi historia</button>
+            <p class="ayuda" id="nota-envio">Al enviar, tu ficha y tus archivos llegan a comunicaciones digitales de GEOTEC.</p>
+            <div class="alterno" id="alterno" hidden>
+              <p><strong>¿Prefieres enviarlo por correo?</strong> Te armamos el mensaje con tu ficha. Solo adjunta tus fotos o videos antes de enviarlo.</p>
+              <p class="dir">Correo: <span id="dir-correo"></span></p>
+              <div class="alterno-btns">
+                <a class="btn btn-sec" id="abrir-correo" href="#ficha">Abrir mi correo</a>
+                <button type="button" class="btn btn-sec" id="copiar-ficha">Copiar ficha</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <div class="gracias" id="gracias" hidden tabindex="-1">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg>
+      <h2>Recibimos tu historia.</h2>
+      <p id="gracias-txt">Comunicaciones la revisa, la convierte en publicación y te la muestra antes de publicarla.</p>
+      <p>Código de tu envío: <span class="codigo" id="codigo"></span></p>
+      <p class="aviso" id="faltaron" hidden></p>
+      <button type="button" class="btn btn-sec" id="otra">Enviar otra historia</button>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-guia">
+    <div class="sec-head">
+      <p class="eyebrow">Guía rápida</p>
+      <h2 id="t-guia">Cómo tomar material que sí se pueda publicar.</h2>
+    </div>
+    <div class="guia">
+      <div class="guia-col">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>Fotos</h3>
+        <ul>
+          <li>Toma también una foto vertical. Es el formato que mejor se ve en redes.</li>
+          <li>Busca luz natural, con el sol detrás de ti o de lado.</li>
+          <li>Muestra a alguien haciendo algo. Una persona trabajando dice más que el lugar solo.</li>
+          <li>En campo, que se vean completos los elementos de protección personal.</li>
+          <li>Toma varias: de cerca, a media distancia y una general.</li>
+        </ul>
+        <div class="formatos" aria-hidden="true">
+          <div class="fmt"><i style="width:40px;height:50px"></i>4:5</div>
+          <div class="fmt"><i style="width:34px;height:60px"></i>9:16</div>
+          <div class="fmt"><i style="width:60px;height:40px"></i>3:2</div>
+        </div>
+      </div>
+      <div class="guia-col">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 10l3 2-3 2z"/></svg>Video</h3>
+        <ul>
+          <li>Graba vertical, entre 10 y 30 segundos, con el celular quieto o apoyado.</li>
+          <li>Deja el sonido del lugar. La música la ponemos nosotros.</li>
+          <li>Si alguien explica algo, que sea en una o dos frases y mirando a la cámara.</li>
+          <li>Envía el archivo original. WhatsApp le baja la calidad.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-no">
+    <div class="no-grid">
+      <div class="no">
+        <div class="sec-head">
+          <p class="eyebrow">Lo que no publicamos</p>
+          <h2 id="t-no">Cuidamos a los clientes, a las comunidades y al territorio.</h2>
+        </div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Nombres, logos, documentos o placas de vehículos del cliente.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Números de resoluciones, expedientes, contratos o tarifas.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Ubicación exacta de especies sensibles, nidos o predios.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Personas de la comunidad que no hayan dado su autorización.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Correos, cronogramas o información interna.</span></li>
+        </ul>
+      </div>
+      <div class="reco">
+        <p class="eyebrow">Reconocimiento</p>
+        <h3>Tu nombre y tu área van en la publicación.</h3>
+        <p>Cada publicación da crédito al área o a la persona que aportó el material. Cada mes destacamos la historia del mes.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Área comercial · Comunicaciones digitales</p>
+    <p>GEOTEC Ingeniería Ltda.</p>
+  </footer>
+</div>
+
+<script src="config.js"></script>
+<script>
+(function () {
+  "use strict";
+  var ENDPOINT = String(window.HISTORIAS_ENDPOINT || "").trim();
+  var CORREOS = String(window.HISTORIAS_CORREO || "").split(",").map(function (c) { return c.trim(); }).filter(Boolean);
+  var CORREO = CORREOS.join(",");
+  var MAX_MB = 30, MAX_ARCHIVOS = 10, KEY = "geotec-ficha-historia";
+  var $ = function (id) { return document.getElementById(id); };
+  var form = $("f");
+  var campos = ["nombre", "area", "correo", "q1", "q2", "q3", "q4", "q5", "cuando", "enlace"];
+  var checks = ["c1", "c2", "c3", "c4"];
+  var tipos = Array.prototype.slice.call(document.querySelectorAll("#tipos input"));
+  var archivos = [];
+
+  function leer() { try { return JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { return {}; } }
+  function guardar(d) { try { localStorage.setItem(KEY, JSON.stringify(d)); } catch (e) {} }
+  function borrar() { try { localStorage.removeItem(KEY); } catch (e) {} }
+  function datos() {
+    var d = {};
+    campos.forEach(function (id) { d[id] = $(id).value.trim(); });
+    checks.forEach(function (id) { d[id] = $(id).checked; });
+    d.tipos = tipos.filter(function (t) { return t.checked; }).map(function (t) { return t.value; });
+    return d;
+  }
+  function cargar() {
+    var d = leer();
+    campos.forEach(function (id) { if (typeof d[id] === "string") $(id).value = d[id]; });
+    checks.forEach(function (id) { if (typeof d[id] === "boolean") $(id).checked = d[id]; });
+    if (Array.isArray(d.tipos)) tipos.forEach(function (t) { t.checked = d.tipos.indexOf(t.value) >= 0; });
+  }
+  function revisados() {
+    var n = checks.filter(function (id) { return $(id).checked; }).length;
+    $("estado").textContent = n === 4 ? "Todo revisado." : n + " de 4 revisados";
+    $("estado").classList.toggle("listo", n === 4);
+    return n;
+  }
+  function peso(b) { return b >= 1048576 ? (b / 1048576).toFixed(1).replace(".", ",") + " MB" : Math.max(1, Math.round(b / 1024)) + " KB"; }
+  function esValido(f) { return /^(image|video)\//.test(f.type) && f.size > 0 && f.size <= MAX_MB * 1048576; }
+  function pintarLista() {
+    var ul = $("lista"); ul.textContent = "";
+    archivos.forEach(function (f, i) {
+      var li = document.createElement("li");
+      if (!esValido(f)) li.className = "malo";
+      var n = document.createElement("span"); n.textContent = f.name;
+      var p = document.createElement("span"); p.className = "peso";
+      p.textContent = esValido(f) ? peso(f.size) : (f.size > MAX_MB * 1048576 ? "Más de " + MAX_MB + " MB" : "No es foto ni video");
+      var b = document.createElement("button"); b.type = "button"; b.className = "quitar"; b.textContent = "Quitar";
+      b.setAttribute("aria-label", "Quitar " + f.name);
+      b.addEventListener("click", function () { archivos.splice(i, 1); pintarLista(); });
+      li.appendChild(n); li.appendChild(p); li.appendChild(b); ul.appendChild(li);
+    });
+  }
+  function agregar(lista) {
+    Array.prototype.forEach.call(lista, function (f) {
+      var repetido = archivos.some(function (a) { return a.name === f.name && a.size === f.size; });
+      if (!repetido && archivos.length < MAX_ARCHIVOS) archivos.push(f);
+    });
+    pintarLista();
+  }
+  function aviso(txt) { $("aviso").textContent = txt; $("aviso").hidden = !txt; }
+  function marcar(id, malo) { if (malo) $(id).setAttribute("aria-invalid", "true"); else $(id).removeAttribute("aria-invalid"); }
+
+  cargar(); revisados();
+  form.addEventListener("input", function () { guardar(datos()); revisados(); });
+  form.addEventListener("change", function () { guardar(datos()); revisados(); });
+
+  var drop = $("drop"), input = $("archivos");
+  input.addEventListener("change", function () { agregar(input.files); input.value = ""; });
+  ["dragenter", "dragover"].forEach(function (ev) { drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.add("sobre"); }); });
+  ["dragleave", "drop"].forEach(function (ev) { drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.remove("sobre"); }); });
+  drop.addEventListener("drop", function (e) { if (e.dataTransfer && e.dataTransfer.files) agregar(e.dataTransfer.files); });
+
+  if (!ENDPOINT && CORREO) {
+    $("enviar").hidden = true;
+    $("nota-envio").textContent = "Por ahora la ficha se envía por correo.";
+    $("abrir-correo").className = "btn btn-main";
+  } else if (!ENDPOINT) {
+    $("enviar").disabled = true;
+    $("enviar").textContent = "El envío se activa pronto";
+    $("nota-envio").textContent = "Puedes ir llenando tu ficha: se guarda en este navegador.";
+  }
+
+  // Revisión común para el envío por la página y por correo
+  function validar() {
+    var d = datos();
+    aviso("");
+    marcar("nombre", !d.nombre); marcar("area", !d.area); marcar("q1", !d.q1);
+    var correoMalo = d.correo && !$("correo").checkValidity(); marcar("correo", correoMalo);
+    if (!d.nombre || !d.area || !d.q1) { aviso("Faltan datos: escribe tu nombre, elige tu área y responde la pregunta 1."); (!d.nombre ? $("nombre") : !d.area ? $("area") : $("q1")).focus(); return null; }
+    if (correoMalo) { aviso("Revisa tu correo: parece incompleto."); $("correo").focus(); return null; }
+    if (revisados() < 4) { aviso("Marca las cuatro casillas de la lista antes de enviar."); $("c1").focus(); return null; }
+    return d;
+  }
+  function componer(d) {
+    var l = ["FICHA DE HISTORIA · GEOTEC", "", "Nombre: " + d.nombre, "Área: " + d.area];
+    if (d.correo) l.push("Correo: " + d.correo);
+    if (d.tipos.length) l.push("Material: " + d.tipos.join(", "));
+    if (d.cuando) l.push("Cuándo: " + d.cuando);
+    [["q1", "Qué hicimos"], ["q2", "Tipo de proyecto o proceso"], ["q3", "Reto resuelto"], ["q4", "Aprendizaje o dato"], ["q5", "Quién participó"]]
+      .forEach(function (q, i) { if (d[q[0]]) { l.push(""); l.push((i + 1) + ". " + q[1] + ": " + d[q[0]]); } });
+    if (d.enlace) { l.push(""); l.push("Enlace a archivos pesados: " + d.enlace); }
+    l.push(""); l.push("Revisé: autorizaciones, sin datos de clientes, sin ubicaciones sensibles y archivos originales.");
+    return l.join("\n");
+  }
+
+  // Opción de enviar por correo
+  if (CORREO) {
+    $("alterno").hidden = false;
+    $("dir-correo").textContent = CORREOS.join(" y ");
+    if (CORREOS.length > 1) $("dir-correo").parentNode.firstChild.textContent = "Correos: ";
+    $("abrir-correo").addEventListener("click", function (e) {
+      var d = validar();
+      if (!d) { e.preventDefault(); return; }
+      var cuerpo = componer(d);
+      if (archivos.length) cuerpo += "\n\nAdjunto: " + archivos.map(function (f) { return f.name; }).join(", ");
+      if (cuerpo.length > 1800) cuerpo = cuerpo.slice(0, 1750) + "…\n\n(La ficha completa la pego desde el botón Copiar ficha.)";
+      this.href = "mailto:" + CORREO + "?subject=" + encodeURIComponent("Historia GEOTEC · " + d.area + " · " + d.nombre) + "&body=" + encodeURIComponent(cuerpo);
+      aviso("");
+      $("nota-envio").textContent = "Se abrió tu correo con la ficha. Adjunta tus fotos o videos y envíalo. Si no se abrió, copia la ficha y escribe a " + CORREOS.join(" y ") + ".";
+    });
+    $("copiar-ficha").addEventListener("click", function () {
+      var d = validar(); if (!d) return;
+      var txt = componer(d), b = this;
+      function hecho() { b.textContent = "Ficha copiada"; setTimeout(function () { b.textContent = "Copiar ficha"; }, 2200); }
+      function respaldo() {
+        var t = document.createElement("textarea"); t.value = txt; t.setAttribute("readonly", ""); t.style.position = "fixed"; t.style.opacity = "0";
+        document.body.appendChild(t); t.select();
+        try { document.execCommand("copy"); hecho(); } catch (err) { aviso("No pudimos copiar. Selecciona y copia el texto de tus respuestas a mano."); }
+        document.body.removeChild(t);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(hecho, respaldo); else respaldo();
+    });
+  }
+
+  function aBase64(file) {
+    return new Promise(function (ok, mal) {
+      var fr = new FileReader();
+      fr.onload = function () { var s = String(fr.result); ok(s.slice(s.indexOf(",") + 1)); };
+      fr.onerror = function () { mal(fr.error); };
+      fr.readAsDataURL(file);
+    });
+  }
+  function llamar(payload) {
+    return fetch(ENDPOINT, { method: "POST", body: JSON.stringify(payload) })
+      .then(function (r) { return r.json(); })
+      .then(function (j) { if (!j || !j.ok) throw new Error((j && j.error) || "sin respuesta"); return j; });
+  }
+  function progreso(txt, frac) { $("progreso").hidden = false; $("paso-txt").textContent = txt; $("barra").style.width = Math.round(frac * 100) + "%"; }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (!ENDPOINT) return;
+    var d = validar();
+    if (!d) return;
+    var buenos = archivos.filter(esValido);
+    if (buenos.length < archivos.length) { aviso("Quita los archivos marcados en rojo. Para videos de más de " + MAX_MB + " MB usa el campo de enlace."); return; }
+    if (!buenos.length && !d.enlace && !d.q4 && !d.q3) { aviso("Adjunta al menos una foto o video, o cuéntanos más en las preguntas 3 y 4."); return; }
+
+    var boton = $("enviar"); boton.disabled = true; boton.textContent = "Enviando…";
+    var total = buenos.length + 2, hecho = 0, sesion = null, fallidos = [];
+    progreso("Enviando tu ficha…", 0.05);
+    llamar({ accion: "ficha", web: $("web").value, nombre: d.nombre, area: d.area, correo: d.correo, tipos: d.tipos, cuando: d.cuando,
+             q1: d.q1, q2: d.q2, q3: d.q3, q4: d.q4, q5: d.q5, enlace: d.enlace })
+      .then(function (r) {
+        sesion = r; hecho++;
+        return buenos.reduce(function (cadena, f, i) {
+          return cadena.then(function () {
+            progreso("Subiendo archivo " + (i + 1) + " de " + buenos.length + ": " + f.name, hecho / total);
+            return aBase64(f).then(function (b64) {
+              return llamar({ accion: "archivo", id: sesion.id, token: sesion.token, nombre: f.name, tipo: f.type, datos: b64 });
+            }).catch(function () { fallidos.push(f.name); }).then(function () { hecho++; });
+          });
+        }, Promise.resolve());
+      })
+      .then(function () {
+        progreso("Terminando…", (total - 1) / total);
+        return llamar({ accion: "fin", id: sesion.id, token: sesion.token, fallidos: fallidos });
+      })
+      .then(function () {
+        progreso("Listo", 1);
+        $("codigo").textContent = sesion.id;
+        if (fallidos.length) {
+          $("faltaron").textContent = "No pudimos subir: " + fallidos.join(", ") + ". Vuelve a enviarlos en otra ficha o compártelos por enlace.";
+          $("faltaron").hidden = false;
+        } else { $("faltaron").hidden = true; }
+        form.reset(); archivos = []; pintarLista(); borrar(); revisados();
+        form.hidden = true; $("gracias").hidden = false; $("gracias").focus();
+        $("progreso").hidden = true; boton.disabled = false; boton.textContent = "Enviar mi historia";
+      })
+      .catch(function () {
+        $("progreso").hidden = true; boton.disabled = false; boton.textContent = "Enviar mi historia";
+        aviso(sesion
+          ? "Tu ficha llegó, pero se cortó la conexión al final. Comunicaciones la verá igual. Código: " + sesion.id
+          : "No pudimos enviar tu historia. Revisa tu conexión e inténtalo de nuevo; tu ficha sigue guardada aquí.");
+      });
+  });
+
+  $("otra").addEventListener("click", function () {
+    $("gracias").hidden = true; form.hidden = false; aviso(""); $("nombre").focus();
+  });
+
+  // Curvas de nivel
+  var cv = $("curvas"), ctx = cv.getContext("2d");
+  function tok(n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
+  function dibujar() {
+    var r = cv.getBoundingClientRect(); if (!r.width) return;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    cv.width = Math.round(r.width * dpr); cv.height = Math.round(r.height * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, r.width, r.height);
+    var W = r.width, H = r.height, cx = W * .5, cy = H * .5, R = Math.min(W, H) * .44, cima = [cx, cy];
+    for (var k = 0; k < 9; k++) {
+      var s = 1 - k * .102, ox = cx + (1 - s) * W * .09, oy = cy - (1 - s) * H * .05;
+      ctx.beginPath();
+      for (var i = 0; i <= 140; i++) {
+        var t = Math.PI * 2 * i / 140;
+        var rr = R * s * (1 + .10 * Math.sin(2 * t + .6 + k * .18) + .06 * Math.sin(3 * t + 1.9 - k * .12) + .035 * Math.sin(5 * t + .4 + k * .3));
+        var x = ox + rr * Math.cos(t), y = oy + rr * .86 * Math.sin(t);
+        if (i) ctx.lineTo(x, y); else ctx.moveTo(x, y);
+      }
+      ctx.closePath();
+      var maestra = k % 4 === 0;
+      ctx.strokeStyle = maestra ? tok("--green-soft") : tok("--contour");
+      ctx.lineWidth = maestra ? 1.8 : 1.1; ctx.stroke(); cima = [ox, oy];
+    }
+    ctx.fillStyle = tok("--accent"); ctx.beginPath(); ctx.arc(cima[0], cima[1], 7, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = tok("--ink"); ctx.lineWidth = 1.4; ctx.beginPath(); ctx.arc(cima[0], cima[1], 13, 0, Math.PI * 2); ctx.stroke();
+    ctx.fillStyle = tok("--muted"); ctx.font = "600 11px " + tok("--display"); ctx.fillText("3.050 m", cima[0] + 18, cima[1] - 14);
+  }
+  dibujar();
+  window.addEventListener("resize", dibujar);
+  try { matchMedia("(prefers-color-scheme: dark)").addEventListener("change", dibujar); } catch (e) {}
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(dibujar);
+})();
+</script>
+</body>
+</html>
