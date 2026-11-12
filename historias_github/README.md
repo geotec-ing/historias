@@ -6,36 +6,44 @@ Sitio: https://geotec-ing.github.io/historias/
 
 ## Qué hay aquí
 
-- `index.html`: la página, con la ficha de 5 preguntas, la lista de revisión y la carga de fotos y videos.
-- `config.js`: la dirección del receptor y el correo de la opción "Abrir mi correo". Es lo único que se edita para activar el envío.
-- `img/`: fotos, logos e íconos de la página.
-- `apps-script/Codigo.gs`: el receptor. No se ejecuta en GitHub: se copia en Google Apps Script.
+- `index.html`: la página, con las fotos, las 5 preguntas, la lista de revisión y los botones de envío.
+- `config.js`: el enlace del formulario y los correos. Es lo único que se edita.
+- `img/`: fotos, logos e íconos.
 
-## Dónde llega lo que envía la gente
+## Cómo llegan las historias
 
-Cada envío crea:
+1. **Formulario de Microsoft Forms**, creado con la cuenta practicante@geotecingenieria.com. Las respuestas quedan en Forms (y se pueden abrir en Excel) y las fotos y videos quedan en el OneDrive de esa cuenta, en `Aplicaciones > Microsoft Forms > Historias GEOTEC`. Para subir archivos, Forms exige que respondan personas de la organización, es decir, con cuenta de GEOTEC.
+2. **Correo**: el botón "Abrir mi correo" arma un mensaje con las 5 preguntas para practicante@ y Claudia. Sirve para quien no tiene cuenta de GEOTEC.
 
-- una fila en la hoja de Google **Historias GEOTEC · postulaciones**, con nombre, área, correo, las 5 respuestas, el enlace a videos pesados y el estado;
-- una subcarpeta con las fotos y videos dentro de la carpeta **Historias GEOTEC** de Google Drive;
-- si se configura `AVISAR_A`, un correo con la ficha completa y las fotos o videos adjuntos (hasta 20 MB en total; si pesan más, el correo trae el enlace a la carpeta). Al responder ese correo le escribes directo a la persona, si dejó su correo.
+## Crear el formulario (una sola vez)
 
-Todo queda en el Drive de la cuenta de Google que pone en marcha el receptor. Lo ideal es una cuenta de GEOTEC.
+Entra a https://forms.office.com con la cuenta practicante@geotecingenieria.com y crea un **Nuevo formulario** llamado **Historias GEOTEC**. Agrega estas preguntas:
 
-La página también ofrece **enviar por correo**: arma un mensaje con la ficha en el programa de correo de la persona, y ella adjunta sus archivos. Aparece cuando hay un correo en `HISTORIAS_CORREO` dentro de `config.js`. Si todavía no está listo el receptor de Google, la página usa solo esta opción.
+| Pregunta | Tipo | Obligatoria |
+|---|---|---|
+| Tu área | Opción: Componente biótico, Componente físico, Componente social, SIG y cartografía, HSEQ, Laboratorio, InnoLab, Comercial, Administrativa y financiera, Otra | Sí |
+| ¿Qué material tienes? | Opción con varias respuestas: Fotos, Video, Dato o herramienta, Reto resuelto, Logro o evento, El equipo | No |
+| 1. ¿Qué hicimos? | Texto, respuesta larga | Sí |
+| 2. ¿En qué tipo de proyecto o proceso? (sin nombre del cliente) | Texto, respuesta larga | No |
+| 3. ¿Qué reto resolvimos? | Texto, respuesta larga | No |
+| 4. ¿Qué aprendimos o qué dato vale la pena contar? | Texto, respuesta larga | No |
+| 5. ¿Quién participó? | Texto, respuesta larga | No |
+| ¿Cuándo pasó? | Fecha | No |
+| Fotos y videos | Cargar archivo (en "Más tipos de preguntas"): 10 archivos, 1 GB por archivo, tipos Imagen y Video | No |
+| Enlace a videos más pesados | Texto | No |
+| Revisé que las personas que aparecen están de acuerdo, que no hay datos de clientes ni ubicaciones sensibles y que son archivos originales | Opción con una sola respuesta: "Sí, lo revisé" | Sí |
 
-## Activar el envío
+En **Configuración** (los tres puntos de arriba):
 
-1. Entra a https://script.google.com con la cuenta de Google donde quieres recibir todo y crea un **Proyecto nuevo**. Ponle de nombre *Historias GEOTEC*.
-2. Borra el contenido de `Código.gs` y pega todo el contenido de `apps-script/Codigo.gs`.
-3. Para recibir cada historia en el correo, escribe tu correo en `AVISAR_A`, entre las comillas (varios correos van separados por coma). Guarda.
-4. Arriba, elige la función `configurar` y pulsa **Ejecutar**. Google pide permisos: **Revisar permisos**, elige la cuenta y, si sale "Google no verificó esta app", entra a **Configuración avanzada** > **Ir a Historias GEOTEC** > **Permitir**. En el registro aparecen los enlaces de la carpeta y de la hoja.
-5. Pulsa **Implementar** > **Nueva implementación** > tipo **Aplicación web**. En *Ejecutar como* deja **Yo** y en *Quién tiene acceso* elige **Cualquier usuario**. Pulsa **Implementar** y copia la URL de la aplicación web (termina en `/exec`).
-6. En este repositorio, abre `config.js`, pulsa el lápiz, pega la URL en `HISTORIAS_ENDPOINT` y el correo de comunicaciones en `HISTORIAS_CORREO`, y guarda con **Commit changes**.
-7. Espera uno o dos minutos, abre el sitio y haz un envío de prueba con una foto. Debe aparecer la fila en la hoja y la foto en Drive.
+- Marca **Solo las personas de mi organización pueden responder** y **Registrar nombre**. Así no hace falta preguntar el nombre.
+- Marca **Obtener una notificación por correo electrónico de cada respuesta**.
 
-Si cambias el código del receptor, publica la nueva versión en **Implementar** > **Gestionar implementaciones** > lápiz > **Versión: nueva**. Así la URL no cambia.
+Para que Claudia también reciba cada historia, en el Outlook de practicante crea una regla que reenvíe a claudia.mejia@geotecingenieria.com los correos de Microsoft Forms que digan "Historias GEOTEC". Otra opción es compartirle el formulario para colaborar, y así ve las respuestas.
 
-## Límites
+## Conectar el formulario con la página
 
-- Hasta 10 archivos por ficha y 30 MB por archivo. Para videos más pesados hay un campo para pegar un enlace de OneDrive, Drive o WeTransfer.
-- La página no aparece en buscadores (`noindex`), pero cualquiera con el enlace puede abrirla y enviar.
+1. En Forms, pulsa **Recopilar respuestas** y **Copiar vínculo**.
+2. En este repositorio abre `config.js`, pulsa el lápiz, pega el vínculo entre las comillas de `HISTORIAS_FORMULARIO` y pulsa **Commit changes**.
+3. Espera uno o dos minutos y prueba el botón **Abrir el formulario** con una foto.
+
+Mientras `HISTORIAS_FORMULARIO` esté vacío, la página funciona solo con la opción de correo.

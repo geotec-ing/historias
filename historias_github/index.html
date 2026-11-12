@@ -20,11 +20,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap">
 <style>
-/* Una columna editorial: portada con curvas de nivel, franja de fotos, secciones y la ficha como formato que se envía desde la página. */
+/* Una columna editorial: portada con curvas de nivel, franja de fotos, secciones y el envío por el formulario de GEOTEC. */
 :root {
   --bg: #F7F7F3; --surface: #FFFFFF; --ink: #26271F; --muted: #5E6052; --line: #DCDDD2;
   --accent: #FDD000; --accent-ink: #26271F; --green: #6E7812; --green-soft: #97A419;
-  --contour: #C9CDB0; --on-ink-accent: #FDD000; --field: #FBFBF8; --ok: #4F7A1F; --bad: #B4472B; --bad-soft: #FBEDE8;
+  --contour: #C9CDB0; --on-ink-accent: #FDD000; --field: #FBFBF8; --ok: #4F7A1F; --bad: #B4472B;
   --display: "Poppins", "Segoe UI", system-ui, sans-serif;
   --body: "Inter", "Segoe UI", system-ui, sans-serif;
   --logo-light: block; --logo-dark: none;
@@ -34,7 +34,7 @@
   :root {
     --bg: #1A1B15; --surface: #23251D; --ink: #EDEEE5; --muted: #AEB09F; --line: #393B30;
     --accent: #FDD000; --accent-ink: #1A1B15; --green: #B9C64A; --green-soft: #97A419;
-    --contour: #43472F; --on-ink-accent: #6E7812; --field: #1E2018; --ok: #9CC45A; --bad: #F08A6C; --bad-soft: #3A231C;
+    --contour: #43472F; --on-ink-accent: #6E7812; --field: #1E2018; --ok: #9CC45A; --bad: #F08A6C;
     --logo-light: none; --logo-dark: block; color-scheme: dark;
   }
 }
@@ -66,12 +66,13 @@ section { padding-block: clamp(48px, 7vw, 88px); border-top: 1px solid var(--lin
 .hero h1 { font-size: clamp(2.1rem, 5.4vw, 3.6rem); font-weight: 800; letter-spacing: -0.02em; }
 .hero h1 mark { background: linear-gradient(var(--accent), var(--accent)) no-repeat 0 100% / 100% .14em; color: inherit; padding-bottom: .06em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 .ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 22px; border-radius: 999px; font-family: var(--display); font-weight: 600; font-size: .98rem; text-decoration: none; border: 2px solid transparent; cursor: pointer; transition: transform .15s ease, background .15s ease; }
-.btn:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, .chip input:focus-visible + span, .drop:focus-within { outline: 3px solid var(--green-soft); outline-offset: 2px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 22px; border-radius: 999px; font-family: var(--display); font-weight: 600; font-size: .98rem; text-decoration: none; border: 2px solid transparent; cursor: pointer; transition: transform .15s ease, background .15s ease; background: none; color: inherit; }
+.btn:focus-visible, button:focus-visible { outline: 3px solid var(--green-soft); outline-offset: 2px; }
 .btn-main { background: var(--accent); color: var(--accent-ink); }
 .btn-main:hover { transform: translateY(-1px); }
 .btn-sec { background: transparent; color: var(--ink); border-color: var(--ink); }
-.btn:disabled { background: var(--line); color: var(--muted); cursor: not-allowed; transform: none; }
+.btn[aria-disabled="true"] { background: var(--line); color: var(--muted); border-color: transparent; cursor: not-allowed; transform: none; }
+.btn svg { width: 18px; height: 18px; }
 .terreno { display: grid; gap: 4px; max-width: 100%; }
 .terreno canvas { width: 100%; aspect-ratio: 1 / 1; display: block; }
 .cota { justify-self: end; font-family: var(--display); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); text-align: right; line-height: 1.5; }
@@ -95,64 +96,32 @@ section { padding-block: clamp(48px, 7vw, 88px); border-top: 1px solid var(--lin
 .despues { margin-top: 28px; display: flex; gap: 12px; align-items: flex-start; padding: 18px 20px; background: var(--surface); border-radius: 12px; border: 1px solid var(--line); }
 .despues svg { flex: none; width: 22px; height: 22px; color: var(--green); margin-top: 2px; }
 
-/* Ficha */
+/* Ficha y envío */
 .ficha-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 28px; align-items: start; }
 .formato { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
 .formato-head { display: flex; justify-content: space-between; gap: 12px; align-items: center; padding: 14px 22px; background: var(--ink); color: var(--bg); font-family: var(--display); font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; }
 .formato-head span:last-child { color: var(--on-ink-accent); }
-.bloque { display: grid; gap: 20px; padding: 22px; }
-.fila { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
-.campo { display: grid; gap: 6px; min-width: 0; }
-label, legend { font-weight: 600; font-size: .92rem; }
-.opc { font-weight: 400; color: var(--muted); font-size: .85rem; }
-.campo small, .ayuda { color: var(--muted); font-size: .82rem; }
-.num { display: inline-grid; place-items: center; width: 22px; height: 22px; margin-right: 6px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); font-family: var(--display); font-size: .74rem; font-weight: 700; vertical-align: 1px; }
-input[type="text"], input[type="email"], input[type="url"], input[type="month"], select, textarea { width: 100%; font: inherit; font-size: .95rem; color: var(--ink); background: var(--field); border: 1px solid var(--line); border-radius: 10px; padding: 11px 12px; }
-textarea { min-height: 76px; resize: vertical; line-height: 1.5; }
-::placeholder { color: var(--muted); opacity: .75; }
-[aria-invalid="true"] { border-color: var(--bad) !important; }
-fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
-.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
-.chip { position: relative; }
-.chip input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
-.chip span { display: inline-block; padding: 7px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--field); font-size: .88rem; color: var(--muted); transition: background .15s, color .15s, border-color .15s; }
-.chip input:checked + span { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-.trampa { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.preguntas { list-style: none; margin: 0; padding: 8px 22px 22px; display: grid; }
+.preguntas li { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 12px; padding-block: 16px; border-bottom: 1px dashed var(--line); }
+.preguntas li:last-child { border-bottom: 0; }
+.num { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); font-family: var(--display); font-size: .8rem; font-weight: 700; }
+.preguntas h3 { font-size: 1rem; }
+.preguntas p { color: var(--muted); font-size: .9rem; margin-top: 4px; }
+.preguntas p em { font-style: normal; color: var(--ink); }
 
 .lateral { display: grid; gap: 20px; position: sticky; top: calc(env(safe-area-inset-top, 0px) + 16px); }
-.caja { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 20px; display: grid; gap: 12px; }
-.check { display: grid; grid-template-columns: 22px 1fr; gap: 10px; align-items: start; font-size: .9rem; font-weight: 400; cursor: pointer; }
-.check input { width: 18px; height: 18px; margin: 3px 0 0; accent-color: var(--green); }
-.estado { font-size: .85rem; color: var(--muted); }
-.estado.listo { color: var(--ok); font-weight: 600; }
-.drop { position: relative; display: grid; justify-items: center; gap: 6px; padding: 22px 16px; border: 2px dashed var(--line); border-radius: 12px; background: var(--field); text-align: center; color: var(--muted); font-size: .9rem; cursor: pointer; transition: border-color .15s, background .15s; }
-.drop.sobre { border-color: var(--green-soft); }
-.drop svg { width: 28px; height: 28px; color: var(--green); }
-.drop strong { color: var(--ink); font-family: var(--display); font-weight: 600; }
-.drop input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; }
-.lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
-.lista li { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 10px; align-items: center; padding: 8px 10px; border-radius: 8px; background: var(--field); border: 1px solid var(--line); font-size: .85rem; }
-.lista li span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.lista li .peso { color: var(--muted); font-variant-numeric: tabular-nums; }
-.lista li.malo { border-color: var(--bad); background: var(--bad-soft); }
-.quitar { border: 0; background: none; color: var(--muted); font: 600 .8rem var(--display); cursor: pointer; padding: 4px 6px; border-radius: 6px; }
-.quitar:hover { color: var(--ink); }
-.enviar { display: grid; gap: 10px; }
-.enviar .btn { width: 100%; }
-.aviso { font-size: .88rem; padding: 12px 14px; border-radius: 10px; background: var(--bad-soft); color: var(--ink); border: 1px solid var(--bad); }
-.progreso { display: grid; gap: 8px; }
-.barra { height: 8px; border-radius: 999px; background: var(--line); overflow: hidden; }
-.barra i { display: block; height: 100%; width: 0; background: var(--green-soft); transition: width .25s ease; }
-.progreso p { font-size: .85rem; color: var(--muted); }
+.caja { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 22px; display: grid; gap: 12px; }
+.caja .ayuda { color: var(--muted); font-size: .88rem; }
+.revisar { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.revisar li { display: grid; grid-template-columns: 20px 1fr; gap: 10px; font-size: .9rem; }
+.revisar svg { width: 18px; height: 18px; color: var(--ok); margin-top: 3px; }
+.envio { border: 2px solid var(--ink); }
+.envio .btn { width: 100%; }
 .alterno { border-top: 1px solid var(--line); padding-top: 14px; display: grid; gap: 10px; font-size: .88rem; color: var(--muted); }
 .alterno strong { color: var(--ink); font-family: var(--display); font-weight: 600; }
-.alterno .dir span { color: var(--ink); font-weight: 600; user-select: all; word-break: break-all; }
+.alterno .dir span { color: var(--ink); font-weight: 600; user-select: all; overflow-wrap: anywhere; }
 .alterno-btns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
-.alterno-btns .btn { min-height: 44px; padding: 0 14px; font-size: .9rem; }
-.gracias { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: clamp(24px, 5vw, 48px); display: grid; gap: 14px; justify-items: start; }
-.gracias svg { width: 44px; height: 44px; color: var(--ok); }
-.gracias .codigo { font-family: var(--display); font-weight: 600; background: var(--field); border: 1px dashed var(--line); padding: 6px 12px; border-radius: 8px; font-variant-numeric: tabular-nums; }
-.gracias p { color: var(--muted); max-width: 60ch; }
+.alterno-btns .btn { min-height: 44px; padding: 0 14px; font-size: .9rem; width: 100%; }
 
 .guia { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
 .guia-col { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 24px; display: grid; gap: 14px; align-content: start; }
@@ -182,7 +151,7 @@ footer { border-top: 1px solid var(--line); padding-block: 32px 48px; display: f
   .grid6 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 600px) {
-  .grid6, .pasos, .guia, .fila { grid-template-columns: 1fr; }
+  .grid6, .pasos, .guia { grid-template-columns: 1fr; }
   .tag { display: none; }
   .hero { padding-block: 16px 32px; }
   .fotos { grid-template-columns: repeat(2, minmax(0, 1fr)); height: auto; margin-bottom: 48px; }
@@ -275,16 +244,16 @@ footer { border-top: 1px solid var(--line); padding-block: 32px 48px; display: f
     </div>
     <div class="pasos">
       <div class="paso">
-        <h3>Arma tu ficha</h3>
-        <p>Responde las cinco preguntas de abajo. Con eso escribimos la publicación sin tener que perseguirte.</p>
+        <h3>Prepara tu historia</h3>
+        <p>Piensa tus respuestas a las cinco preguntas de abajo. Con eso escribimos la publicación sin tener que perseguirte.</p>
       </div>
       <div class="paso">
         <h3>Revisa la lista</h3>
         <p>Confirma que las personas que aparecen están de acuerdo y que no hay datos de clientes.</p>
       </div>
       <div class="paso">
-        <h3>Adjunta y envía</h3>
-        <p>Sube tus fotos o videos originales y envía todo desde esta misma página.</p>
+        <h3>Envía por el formulario</h3>
+        <p>Entra con tu cuenta de GEOTEC, responde y adjunta tus fotos o videos originales.</p>
       </div>
     </div>
     <div class="despues">
@@ -296,139 +265,49 @@ footer { border-top: 1px solid var(--line); padding-block: 32px 48px; display: f
   <section id="ficha" aria-labelledby="t-ficha">
     <div class="sec-head">
       <p class="eyebrow">Ficha de historia</p>
-      <h2 id="t-ficha">Cuéntanos tu historia en cinco preguntas.</h2>
-      <p class="lead">Escribe como le contarías a un colega. No hace falta redactar bonito: nosotros lo convertimos en publicación. Mientras escribes, tu borrador se guarda en este navegador.</p>
+      <h2 id="t-ficha">Estas son las cinco preguntas del formulario.</h2>
+      <p class="lead">Tenlas pensadas antes de abrirlo. Escribe como le contarías a un colega. No hace falta redactar bonito: nosotros lo convertimos en publicación.</p>
     </div>
 
-    <form id="f" novalidate>
-      <div class="ficha-grid">
-        <div class="formato">
-          <div class="formato-head"><span>Ficha de historia</span><span>GEOTEC</span></div>
-          <div class="bloque">
-            <div class="fila">
-              <div class="campo">
-                <label for="nombre">Tu nombre</label>
-                <input type="text" id="nombre" name="nombre" autocomplete="name" placeholder="Nombre y apellido" required maxlength="120">
-              </div>
-              <div class="campo">
-                <label for="area">Tu área</label>
-                <select id="area" name="area" required>
-                  <option value="">Elige tu área</option>
-                  <option>Componente biótico</option>
-                  <option>Componente físico</option>
-                  <option>Componente social</option>
-                  <option>SIG y cartografía</option>
-                  <option>HSEQ</option>
-                  <option>Laboratorio</option>
-                  <option>InnoLab</option>
-                  <option>Comercial</option>
-                  <option>Administrativa y financiera</option>
-                  <option>Otra</option>
-                </select>
-              </div>
-            </div>
-            <div class="campo">
-              <label for="correo">Tu correo <span class="opc">(opcional, para mostrarte la pieza antes de publicarla)</span></label>
-              <input type="email" id="correo" name="correo" autocomplete="email" placeholder="nombre@empresa.com" maxlength="120">
-            </div>
+    <div class="ficha-grid">
+      <div class="formato">
+        <div class="formato-head"><span>Ficha de historia</span><span>GEOTEC</span></div>
+        <ol class="preguntas">
+          <li><span class="num">1</span><div><h3>¿Qué hicimos?</h3><p><em>Ej.:</em> Instalamos cámaras trampa para monitorear fauna, o automatizamos un informe que tomaba dos días.</p></div></li>
+          <li><span class="num">2</span><div><h3>¿En qué tipo de proyecto o proceso?</h3><p>Describe el tipo de proyecto, proceso o área. <em>Sin nombre del cliente.</em></p></div></li>
+          <li><span class="num">3</span><div><h3>¿Qué reto resolvimos?</h3><p><em>Ej.:</em> Las lluvias cortaban el acceso y ajustamos la ruta y las fechas de revisión.</p></div></li>
+          <li><span class="num">4</span><div><h3>¿Qué aprendimos o qué dato vale la pena contar?</h3><p><em>Ej.:</em> Una sola estación puede registrar especies que de día nunca vemos.</p></div></li>
+          <li><span class="num">5</span><div><h3>¿Quién participó?</h3><p><em>Ej.:</em> Equipo biótico, con apoyo de un auxiliar de campo de la comunidad.</p></div></li>
+        </ol>
+      </div>
 
-            <fieldset>
-              <legend>¿Qué material tienes?</legend>
-              <div class="chips" id="tipos">
-                <label class="chip"><input type="checkbox" value="Fotos" id="t1"><span>Fotos</span></label>
-                <label class="chip"><input type="checkbox" value="Video" id="t2"><span>Video</span></label>
-                <label class="chip"><input type="checkbox" value="Dato o herramienta" id="t3"><span>Dato o herramienta</span></label>
-                <label class="chip"><input type="checkbox" value="Reto resuelto" id="t4"><span>Reto resuelto</span></label>
-                <label class="chip"><input type="checkbox" value="Logro o evento" id="t5"><span>Logro o evento</span></label>
-                <label class="chip"><input type="checkbox" value="El equipo" id="t6"><span>El equipo</span></label>
-              </div>
-            </fieldset>
-
-            <div class="campo">
-              <label for="q1"><span class="num">1</span>¿Qué hicimos?</label>
-              <textarea id="q1" name="q1" required maxlength="3000" placeholder="Ej.: Instalamos cámaras trampa para monitorear fauna, o automatizamos un informe que tomaba dos días."></textarea>
-            </div>
-            <div class="campo">
-              <label for="q2"><span class="num">2</span>¿En qué tipo de proyecto o proceso?</label>
-              <textarea id="q2" name="q2" maxlength="3000" placeholder="Ej.: Seguimiento ambiental de un proyecto de hidrocarburos en los Llanos."></textarea>
-              <small>Describe el tipo de proyecto, proceso o área. Sin nombre del cliente.</small>
-            </div>
-            <div class="campo">
-              <label for="q3"><span class="num">3</span>¿Qué reto resolvimos?</label>
-              <textarea id="q3" name="q3" maxlength="3000" placeholder="Ej.: Las lluvias cortaban el acceso y ajustamos la ruta y las fechas de revisión."></textarea>
-            </div>
-            <div class="campo">
-              <label for="q4"><span class="num">4</span>¿Qué aprendimos o qué dato vale la pena contar?</label>
-              <textarea id="q4" name="q4" maxlength="3000" placeholder="Ej.: Una sola estación puede registrar especies que de día nunca vemos."></textarea>
-            </div>
-            <div class="campo">
-              <label for="q5"><span class="num">5</span>¿Quién participó?</label>
-              <textarea id="q5" name="q5" maxlength="3000" placeholder="Ej.: Equipo biótico, con apoyo de un auxiliar de campo de la comunidad."></textarea>
-            </div>
-            <div class="campo">
-              <label for="cuando">¿Cuándo pasó? <span class="opc">(opcional)</span></label>
-              <input type="month" id="cuando" name="cuando">
-            </div>
-            <div class="trampa" aria-hidden="true">
-              <label for="web">No llenes este campo</label>
-              <input type="text" id="web" name="web" tabindex="-1" autocomplete="off">
-            </div>
-          </div>
+      <div class="lateral">
+        <div class="caja">
+          <h3>Antes de enviar, revisa</h3>
+          <ul class="revisar">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Las personas que aparecen saben que se publicará y están de acuerdo.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>No aparecen nombres, logos, documentos ni placas del cliente, ni números de resoluciones o expedientes.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>No se ve la ubicación exacta de especies sensibles, nidos o predios.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Son los archivos originales, no capturas ni reenvíos de WhatsApp.</span></li>
+          </ul>
         </div>
 
-        <div class="lateral">
-          <div class="caja">
-            <h3>Antes de enviar</h3>
-            <label class="check"><input type="checkbox" id="c1"><span>Las personas que aparecen saben que se publicará y están de acuerdo.</span></label>
-            <label class="check"><input type="checkbox" id="c2"><span>No aparecen nombres, logos, documentos ni placas del cliente, ni números de resoluciones o expedientes.</span></label>
-            <label class="check"><input type="checkbox" id="c3"><span>No se ve la ubicación exacta de especies sensibles, nidos o predios.</span></label>
-            <label class="check"><input type="checkbox" id="c4"><span>Son los archivos originales, no capturas ni reenvíos de WhatsApp.</span></label>
-            <p class="estado" id="estado" aria-live="polite">0 de 4 revisados</p>
-          </div>
-
-          <div class="caja">
-            <h3>Fotos y videos</h3>
-            <label class="drop" id="drop">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg>
-              <strong>Elige o arrastra tus archivos</strong>
-              <span>Hasta 10 fotos o videos, de máximo 30 MB cada uno</span>
-              <input type="file" id="archivos" accept="image/*,video/*" multiple>
-            </label>
-            <ul class="lista" id="lista" aria-live="polite"></ul>
-            <div class="campo">
-              <label for="enlace">¿Videos más pesados? <span class="opc">(opcional)</span></label>
-              <input type="url" id="enlace" name="enlace" placeholder="Enlace de OneDrive, Drive o WeTransfer" maxlength="500">
-            </div>
-          </div>
-
-          <div class="enviar">
-            <p class="aviso" id="aviso" role="alert" hidden></p>
-            <div class="progreso" id="progreso" hidden>
-              <div class="barra"><i id="barra"></i></div>
-              <p id="paso-txt">Enviando…</p>
-            </div>
-            <button type="submit" class="btn btn-main" id="enviar">Enviar mi historia</button>
-            <p class="ayuda" id="nota-envio">Al enviar, tu ficha y tus archivos llegan a comunicaciones digitales de GEOTEC.</p>
-            <div class="alterno" id="alterno" hidden>
-              <p><strong>¿Prefieres enviarlo por correo?</strong> Te armamos el mensaje con tu ficha. Solo adjunta tus fotos o videos antes de enviarlo.</p>
-              <p class="dir">Correo: <span id="dir-correo"></span></p>
-              <div class="alterno-btns">
-                <a class="btn btn-sec" id="abrir-correo" href="#ficha">Abrir mi correo</a>
-                <button type="button" class="btn btn-sec" id="copiar-ficha">Copiar ficha</button>
-              </div>
+        <div class="caja envio">
+          <h3>Envía tu historia</h3>
+          <p class="ayuda" id="nota-form">El formulario se abre con tu cuenta de Microsoft de GEOTEC. Ahí respondes las preguntas y adjuntas tus fotos o videos.</p>
+          <a class="btn btn-main" id="ir-form" href="#ficha" target="_blank" rel="noopener">Abrir el formulario
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </a>
+          <div class="alterno" id="alterno" hidden>
+            <p><strong>¿No tienes cuenta de GEOTEC o prefieres el correo?</strong> Escríbenos con tus respuestas y adjunta tus fotos o videos.</p>
+            <p class="dir">Correo: <span id="dir-correo"></span></p>
+            <div class="alterno-btns">
+              <a class="btn btn-sec" id="abrir-correo" href="#ficha">Abrir mi correo</a>
+              <button type="button" class="btn btn-sec" id="copiar-correo">Copiar correo</button>
             </div>
           </div>
         </div>
       </div>
-    </form>
-
-    <div class="gracias" id="gracias" hidden tabindex="-1">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg>
-      <h2>Recibimos tu historia.</h2>
-      <p id="gracias-txt">Comunicaciones la revisa, la convierte en publicación y te la muestra antes de publicarla.</p>
-      <p>Código de tu envío: <span class="codigo" id="codigo"></span></p>
-      <p class="aviso" id="faltaron" hidden></p>
-      <button type="button" class="btn btn-sec" id="otra">Enviar otra historia</button>
     </div>
   </section>
 
@@ -498,203 +377,52 @@ footer { border-top: 1px solid var(--line); padding-block: 32px 48px; display: f
 <script>
 (function () {
   "use strict";
-  var ENDPOINT = String(window.HISTORIAS_ENDPOINT || "").trim();
-  var CORREOS = String(window.HISTORIAS_CORREO || "").split(",").map(function (c) { return c.trim(); }).filter(Boolean);
-  var CORREO = CORREOS.join(",");
-  var MAX_MB = 30, MAX_ARCHIVOS = 10, KEY = "geotec-ficha-historia";
   var $ = function (id) { return document.getElementById(id); };
-  var form = $("f");
-  var campos = ["nombre", "area", "correo", "q1", "q2", "q3", "q4", "q5", "cuando", "enlace"];
-  var checks = ["c1", "c2", "c3", "c4"];
-  var tipos = Array.prototype.slice.call(document.querySelectorAll("#tipos input"));
-  var archivos = [];
+  var FORMULARIO = String(window.HISTORIAS_FORMULARIO || "").trim();
+  var CORREOS = String(window.HISTORIAS_CORREO || "").split(",").map(function (c) { return c.trim(); }).filter(Boolean);
+  var ir = $("ir-form");
 
-  function leer() { try { return JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { return {}; } }
-  function guardar(d) { try { localStorage.setItem(KEY, JSON.stringify(d)); } catch (e) {} }
-  function borrar() { try { localStorage.removeItem(KEY); } catch (e) {} }
-  function datos() {
-    var d = {};
-    campos.forEach(function (id) { d[id] = $(id).value.trim(); });
-    checks.forEach(function (id) { d[id] = $(id).checked; });
-    d.tipos = tipos.filter(function (t) { return t.checked; }).map(function (t) { return t.value; });
-    return d;
-  }
-  function cargar() {
-    var d = leer();
-    campos.forEach(function (id) { if (typeof d[id] === "string") $(id).value = d[id]; });
-    checks.forEach(function (id) { if (typeof d[id] === "boolean") $(id).checked = d[id]; });
-    if (Array.isArray(d.tipos)) tipos.forEach(function (t) { t.checked = d.tipos.indexOf(t.value) >= 0; });
-  }
-  function revisados() {
-    var n = checks.filter(function (id) { return $(id).checked; }).length;
-    $("estado").textContent = n === 4 ? "Todo revisado." : n + " de 4 revisados";
-    $("estado").classList.toggle("listo", n === 4);
-    return n;
-  }
-  function peso(b) { return b >= 1048576 ? (b / 1048576).toFixed(1).replace(".", ",") + " MB" : Math.max(1, Math.round(b / 1024)) + " KB"; }
-  function esValido(f) { return /^(image|video)\//.test(f.type) && f.size > 0 && f.size <= MAX_MB * 1048576; }
-  function pintarLista() {
-    var ul = $("lista"); ul.textContent = "";
-    archivos.forEach(function (f, i) {
-      var li = document.createElement("li");
-      if (!esValido(f)) li.className = "malo";
-      var n = document.createElement("span"); n.textContent = f.name;
-      var p = document.createElement("span"); p.className = "peso";
-      p.textContent = esValido(f) ? peso(f.size) : (f.size > MAX_MB * 1048576 ? "Más de " + MAX_MB + " MB" : "No es foto ni video");
-      var b = document.createElement("button"); b.type = "button"; b.className = "quitar"; b.textContent = "Quitar";
-      b.setAttribute("aria-label", "Quitar " + f.name);
-      b.addEventListener("click", function () { archivos.splice(i, 1); pintarLista(); });
-      li.appendChild(n); li.appendChild(p); li.appendChild(b); ul.appendChild(li);
-    });
-  }
-  function agregar(lista) {
-    Array.prototype.forEach.call(lista, function (f) {
-      var repetido = archivos.some(function (a) { return a.name === f.name && a.size === f.size; });
-      if (!repetido && archivos.length < MAX_ARCHIVOS) archivos.push(f);
-    });
-    pintarLista();
-  }
-  function aviso(txt) { $("aviso").textContent = txt; $("aviso").hidden = !txt; }
-  function marcar(id, malo) { if (malo) $(id).setAttribute("aria-invalid", "true"); else $(id).removeAttribute("aria-invalid"); }
-
-  cargar(); revisados();
-  form.addEventListener("input", function () { guardar(datos()); revisados(); });
-  form.addEventListener("change", function () { guardar(datos()); revisados(); });
-
-  var drop = $("drop"), input = $("archivos");
-  input.addEventListener("change", function () { agregar(input.files); input.value = ""; });
-  ["dragenter", "dragover"].forEach(function (ev) { drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.add("sobre"); }); });
-  ["dragleave", "drop"].forEach(function (ev) { drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.remove("sobre"); }); });
-  drop.addEventListener("drop", function (e) { if (e.dataTransfer && e.dataTransfer.files) agregar(e.dataTransfer.files); });
-
-  if (!ENDPOINT && CORREO) {
-    $("enviar").hidden = true;
-    $("nota-envio").textContent = "Por ahora la ficha se envía por correo.";
-    $("abrir-correo").className = "btn btn-main";
-  } else if (!ENDPOINT) {
-    $("enviar").disabled = true;
-    $("enviar").textContent = "El envío se activa pronto";
-    $("nota-envio").textContent = "Puedes ir llenando tu ficha: se guarda en este navegador.";
+  // Botón del formulario de Microsoft
+  if (FORMULARIO) {
+    ir.href = FORMULARIO;
+  } else {
+    ir.setAttribute("aria-disabled", "true");
+    ir.removeAttribute("target");
+    ir.firstChild.textContent = "El formulario se activa pronto";
+    ir.querySelector("svg").style.display = "none";
+    ir.addEventListener("click", function (e) { e.preventDefault(); });
+    $("nota-form").textContent = CORREOS.length ? "Mientras tanto, envía tu historia por correo." : "Muy pronto podrás enviar tu historia desde aquí.";
   }
 
-  // Revisión común para el envío por la página y por correo
-  function validar() {
-    var d = datos();
-    aviso("");
-    marcar("nombre", !d.nombre); marcar("area", !d.area); marcar("q1", !d.q1);
-    var correoMalo = d.correo && !$("correo").checkValidity(); marcar("correo", correoMalo);
-    if (!d.nombre || !d.area || !d.q1) { aviso("Faltan datos: escribe tu nombre, elige tu área y responde la pregunta 1."); (!d.nombre ? $("nombre") : !d.area ? $("area") : $("q1")).focus(); return null; }
-    if (correoMalo) { aviso("Revisa tu correo: parece incompleto."); $("correo").focus(); return null; }
-    if (revisados() < 4) { aviso("Marca las cuatro casillas de la lista antes de enviar."); $("c1").focus(); return null; }
-    return d;
-  }
-  function componer(d) {
-    var l = ["FICHA DE HISTORIA · GEOTEC", "", "Nombre: " + d.nombre, "Área: " + d.area];
-    if (d.correo) l.push("Correo: " + d.correo);
-    if (d.tipos.length) l.push("Material: " + d.tipos.join(", "));
-    if (d.cuando) l.push("Cuándo: " + d.cuando);
-    [["q1", "Qué hicimos"], ["q2", "Tipo de proyecto o proceso"], ["q3", "Reto resuelto"], ["q4", "Aprendizaje o dato"], ["q5", "Quién participó"]]
-      .forEach(function (q, i) { if (d[q[0]]) { l.push(""); l.push((i + 1) + ". " + q[1] + ": " + d[q[0]]); } });
-    if (d.enlace) { l.push(""); l.push("Enlace a archivos pesados: " + d.enlace); }
-    l.push(""); l.push("Revisé: autorizaciones, sin datos de clientes, sin ubicaciones sensibles y archivos originales.");
-    return l.join("\n");
-  }
-
-  // Opción de enviar por correo
-  if (CORREO) {
+  // Opción de correo
+  if (CORREOS.length) {
     $("alterno").hidden = false;
     $("dir-correo").textContent = CORREOS.join(" y ");
     if (CORREOS.length > 1) $("dir-correo").parentNode.firstChild.textContent = "Correos: ";
-    $("abrir-correo").addEventListener("click", function (e) {
-      var d = validar();
-      if (!d) { e.preventDefault(); return; }
-      var cuerpo = componer(d);
-      if (archivos.length) cuerpo += "\n\nAdjunto: " + archivos.map(function (f) { return f.name; }).join(", ");
-      if (cuerpo.length > 1800) cuerpo = cuerpo.slice(0, 1750) + "…\n\n(La ficha completa la pego desde el botón Copiar ficha.)";
-      this.href = "mailto:" + CORREO + "?subject=" + encodeURIComponent("Historia GEOTEC · " + d.area + " · " + d.nombre) + "&body=" + encodeURIComponent(cuerpo);
-      aviso("");
-      $("nota-envio").textContent = "Se abrió tu correo con la ficha. Adjunta tus fotos o videos y envíalo. Si no se abrió, copia la ficha y escribe a " + CORREOS.join(" y ") + ".";
-    });
-    $("copiar-ficha").addEventListener("click", function () {
-      var d = validar(); if (!d) return;
-      var txt = componer(d), b = this;
-      function hecho() { b.textContent = "Ficha copiada"; setTimeout(function () { b.textContent = "Copiar ficha"; }, 2200); }
+    if (!FORMULARIO) $("abrir-correo").className = "btn btn-main";
+    var cuerpo = [
+      "Hola, comparto mi historia para Historias GEOTEC.", "",
+      "Nombre:", "Área:", "",
+      "1. ¿Qué hicimos?", "", "",
+      "2. ¿En qué tipo de proyecto o proceso? (sin nombre del cliente)", "", "",
+      "3. ¿Qué reto resolvimos?", "", "",
+      "4. ¿Qué aprendimos o qué dato vale la pena contar?", "", "",
+      "5. ¿Quién participó?", "", "",
+      "Adjunto mis fotos o videos. Revisé que las personas que aparecen están de acuerdo, que no hay datos de clientes ni ubicaciones sensibles y que son los archivos originales."
+    ].join("\n");
+    $("abrir-correo").href = "mailto:" + CORREOS.join(",") + "?subject=" + encodeURIComponent("Historia GEOTEC") + "&body=" + encodeURIComponent(cuerpo);
+    $("copiar-correo").addEventListener("click", function () {
+      var b = this, txt = CORREOS.join(", ");
+      function hecho() { b.textContent = "Copiado"; setTimeout(function () { b.textContent = "Copiar correo"; }, 2200); }
       function respaldo() {
         var t = document.createElement("textarea"); t.value = txt; t.setAttribute("readonly", ""); t.style.position = "fixed"; t.style.opacity = "0";
         document.body.appendChild(t); t.select();
-        try { document.execCommand("copy"); hecho(); } catch (err) { aviso("No pudimos copiar. Selecciona y copia el texto de tus respuestas a mano."); }
+        try { document.execCommand("copy"); hecho(); } catch (err) {}
         document.body.removeChild(t);
       }
       if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(hecho, respaldo); else respaldo();
     });
   }
-
-  function aBase64(file) {
-    return new Promise(function (ok, mal) {
-      var fr = new FileReader();
-      fr.onload = function () { var s = String(fr.result); ok(s.slice(s.indexOf(",") + 1)); };
-      fr.onerror = function () { mal(fr.error); };
-      fr.readAsDataURL(file);
-    });
-  }
-  function llamar(payload) {
-    return fetch(ENDPOINT, { method: "POST", body: JSON.stringify(payload) })
-      .then(function (r) { return r.json(); })
-      .then(function (j) { if (!j || !j.ok) throw new Error((j && j.error) || "sin respuesta"); return j; });
-  }
-  function progreso(txt, frac) { $("progreso").hidden = false; $("paso-txt").textContent = txt; $("barra").style.width = Math.round(frac * 100) + "%"; }
-
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    if (!ENDPOINT) return;
-    var d = validar();
-    if (!d) return;
-    var buenos = archivos.filter(esValido);
-    if (buenos.length < archivos.length) { aviso("Quita los archivos marcados en rojo. Para videos de más de " + MAX_MB + " MB usa el campo de enlace."); return; }
-    if (!buenos.length && !d.enlace && !d.q4 && !d.q3) { aviso("Adjunta al menos una foto o video, o cuéntanos más en las preguntas 3 y 4."); return; }
-
-    var boton = $("enviar"); boton.disabled = true; boton.textContent = "Enviando…";
-    var total = buenos.length + 2, hecho = 0, sesion = null, fallidos = [];
-    progreso("Enviando tu ficha…", 0.05);
-    llamar({ accion: "ficha", web: $("web").value, nombre: d.nombre, area: d.area, correo: d.correo, tipos: d.tipos, cuando: d.cuando,
-             q1: d.q1, q2: d.q2, q3: d.q3, q4: d.q4, q5: d.q5, enlace: d.enlace })
-      .then(function (r) {
-        sesion = r; hecho++;
-        return buenos.reduce(function (cadena, f, i) {
-          return cadena.then(function () {
-            progreso("Subiendo archivo " + (i + 1) + " de " + buenos.length + ": " + f.name, hecho / total);
-            return aBase64(f).then(function (b64) {
-              return llamar({ accion: "archivo", id: sesion.id, token: sesion.token, nombre: f.name, tipo: f.type, datos: b64 });
-            }).catch(function () { fallidos.push(f.name); }).then(function () { hecho++; });
-          });
-        }, Promise.resolve());
-      })
-      .then(function () {
-        progreso("Terminando…", (total - 1) / total);
-        return llamar({ accion: "fin", id: sesion.id, token: sesion.token, fallidos: fallidos });
-      })
-      .then(function () {
-        progreso("Listo", 1);
-        $("codigo").textContent = sesion.id;
-        if (fallidos.length) {
-          $("faltaron").textContent = "No pudimos subir: " + fallidos.join(", ") + ". Vuelve a enviarlos en otra ficha o compártelos por enlace.";
-          $("faltaron").hidden = false;
-        } else { $("faltaron").hidden = true; }
-        form.reset(); archivos = []; pintarLista(); borrar(); revisados();
-        form.hidden = true; $("gracias").hidden = false; $("gracias").focus();
-        $("progreso").hidden = true; boton.disabled = false; boton.textContent = "Enviar mi historia";
-      })
-      .catch(function () {
-        $("progreso").hidden = true; boton.disabled = false; boton.textContent = "Enviar mi historia";
-        aviso(sesion
-          ? "Tu ficha llegó, pero se cortó la conexión al final. Comunicaciones la verá igual. Código: " + sesion.id
-          : "No pudimos enviar tu historia. Revisa tu conexión e inténtalo de nuevo; tu ficha sigue guardada aquí.");
-      });
-  });
-
-  $("otra").addEventListener("click", function () {
-    $("gracias").hidden = true; form.hidden = false; aviso(""); $("nombre").focus();
-  });
 
   // Curvas de nivel
   var cv = $("curvas"), ctx = cv.getContext("2d");
